@@ -20,7 +20,7 @@ try:
 except:
     i = 0
 (images, lables, names, id) = ([], [], {}, 0)
-
+print(i)
 while count < 10:
     (rval, im) = webcam.read()
     im = cv2.flip(im, 1, 0)

@@ -15,7 +15,6 @@ def pathdir(fn_nam):
 model = cv2.face.LBPHFaceRecognizer_create()
 model.read('model.xml')
 
-names = ['Hari', 'Sundar', 'Vaishu', 'Pam', 'Sundhachu',]
 # Part 2: Use LBPHRecognizer on camera stream
 face_cascade = cv2.CascadeClassifier(fn_haar)
 webcam = cv2.VideoCapture(0)
@@ -40,7 +39,7 @@ while True:
         cv2.rectangle(im, (x, y), (x + w+10, y + h+10), (0, 255, 0), 2)
 
         if prediction[1]<=120 and prediction[1]>=40:
-            print(names[prediction[0]])
+            print(prediction[0])
     cv2.imshow('..Facial Recogonision..', im)
     if cv2.waitKey(5) & 0xFF == ord('q'):
             break
