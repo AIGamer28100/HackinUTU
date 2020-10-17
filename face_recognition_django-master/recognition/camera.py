@@ -102,5 +102,4 @@ class FaceDetect(object):
 		# update the FPS counter
 		self.fps.update()
 		ret, jpeg = cv2.imencode('.jpg', frame)
-		return jpeg.tobytes()
-		
+		return jpeg.tobytes(), name, proba, preds
