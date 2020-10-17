@@ -6,7 +6,7 @@ from django.conf import settings
 def model_train():
 	# load the face embeddings
 	print("[INFO] loading face embeddings...")
-	embeddings = os.path.sep.join([settings.BASE_DIR, "output\\embeddings.pickle"])
+	embeddings = os.path.sep.join([settings.BASE_DIR, "output/embeddings.pickle"])
 	data = pickle.loads(open(embeddings, "rb").read())
 
 
@@ -22,13 +22,13 @@ def model_train():
 	recognizer.fit(data["embeddings"], labels)
 
 	# write the actual face recognition model to disk
-	recognizers = os.path.sep.join([settings.BASE_DIR, "output\\recognizer.pickle"])
+	recognizers = os.path.sep.join([settings.BASE_DIR, "output/recognizer.pickle"])
 	f = open(recognizers, "wb")
 	f.write(pickle.dumps(recognizer))
 	f.close()
 
 	# write the label encoder to disk
-	le_pickle = os.path.sep.join([settings.BASE_DIR, "output\\le.pickle"])
+	le_pickle = os.path.sep.join([settings.BASE_DIR, "output/le.pickle"])
 	f = open(le_pickle, "wb")
 	f.write(pickle.dumps(le))
 	f.close()

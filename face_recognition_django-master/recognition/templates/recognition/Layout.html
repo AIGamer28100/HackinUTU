@@ -12,7 +12,24 @@
     <title>Real Time Face Recognition</title>
   </head>
   <body>
+    <div class="bodynav">
+        <nav class="navbar navbar-light">
+          <!-- <a class="navbar-brand" href="{% url 'index' %}"> -->
+            <img src="https://i.kisscc0.com/20190403/he/kisscc0-computer-icons-gavel-bidding-auction-art-mono-auction-5ca442e2505ba1.7977922815542688983292.png" width="45" height="45" class="d-inline-block align-top" alt="Auctions">
+            <span class="h1">Auctions</span>
+          </a>
+        </nav>
+        <div class="Profile">
+        </div>
+        <ul class="nav nav-pills">
+          {% block nav %}
+
+          {% endblock %}
+        </ul>
+        <hr><br>
+      </div>
     {% block body %}
+
     {% endblock %}
   </body>
 </html>

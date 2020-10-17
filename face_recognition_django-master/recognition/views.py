@@ -8,10 +8,13 @@ def index(request):
 
 def gen(camera):
 	while True:
-		frame, name, proba, preds = camera.get_frame()
+		frame = camera.get_frame()
 		yield (b'--frame\r\n'
 				b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 def facecam_feed(request):
 	return StreamingHttpResponse(gen(FaceDetect()),
 					content_type='multipart/x-mixed-replace; boundary=frame')
+
+
+# , name, proba, preds

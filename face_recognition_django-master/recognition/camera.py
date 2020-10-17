@@ -7,15 +7,15 @@ from django.conf import settings
 from recognition import extract_embeddings
 from recognition import train_model
 # load our serialized face detector model from disk
-protoPath = os.path.sep.join([settings.BASE_DIR, "face_detection_model\\deploy.prototxt"])
-modelPath = os.path.sep.join([settings.BASE_DIR,"face_detection_model\\res10_300x300_ssd_iter_140000.caffemodel"])
+protoPath = os.path.sep.join([settings.BASE_DIR, "face_detection_model/deploy.prototxt"])
+modelPath = os.path.sep.join([settings.BASE_DIR,"face_detection_model/res10_300x300_ssd_iter_140000.caffemodel"])
 detector = cv2.dnn.readNetFromCaffe(protoPath, modelPath)
 # load our serialized face embedding model from disk
 embedder = cv2.dnn.readNetFromTorch(os.path.join(settings.BASE_DIR,'face_detection_model/openface_nn4.small2.v1.t7'))
 # load the actual face recognition model along with the label encoder
-recognizer = os.path.sep.join([settings.BASE_DIR, "output\\recognizer.pickle"])
+recognizer = os.path.sep.join([settings.BASE_DIR, "output/recognizer.pickle"])
 recognizer = pickle.loads(open(recognizer, "rb").read())
-le = os.path.sep.join([settings.BASE_DIR, "output\\le.pickle"])
+le = os.path.sep.join([settings.BASE_DIR, "output/le.pickle"])
 le = pickle.loads(open(le, "rb").read())
 dataset = os.path.sep.join([settings.BASE_DIR, "dataset"])
 user_list = [ f.name for f in os.scandir(dataset) if f.is_dir() ]
@@ -102,4 +102,5 @@ class FaceDetect(object):
 		# update the FPS counter
 		self.fps.update()
 		ret, jpeg = cv2.imencode('.jpg', frame)
-		return jpeg.tobytes(), name, proba, preds
+		return jpeg.tobytes()
+ # name, proba, preds
