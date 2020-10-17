@@ -6,15 +6,16 @@ from recognition.camera import FaceDetect
 def index(request):
 	return render(request, 'recognition/index.html')
 
-def gen(camera):
-	while True:
-		frame = camera.get_frame()
-		yield (b'--frame\r\n'
-				b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+class gen():
+	def frame(self):
+		self.camera = FaceDetect()
+		while self.camera.fps._numFrames < 50:
+			self.frame, self.name = self.camera.get_frame()
+			self.frame = self.frame.tobytes()
+			yield(b'--frame\r\n'
+				b'Content_type: image/jpeg\r\n\r\n' + self.frame + b'\r\n\r\n')
 
 def facecam_feed(request):
-	return StreamingHttpResponse(gen(FaceDetect()),
+	x = gen()
+	return StreamingHttpResponse(x.frame(),
 					content_type='multipart/x-mixed-replace; boundary=frame')
-
-
-# , name, proba, preds

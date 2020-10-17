@@ -22,6 +22,7 @@ user_list = [ f.name for f in os.scandir(dataset) if f.is_dir() ]
 
 class FaceDetect(object):
 	def __init__(self):
+		cv2.destroyAllWindows()
 		extract_embeddings.embeddings()
 		train_model.model_train()
 		# initialize the video stream, then allow the camera sensor to warm up
@@ -30,6 +31,7 @@ class FaceDetect(object):
 		self.fps = FPS().start()
 
 	def __del__(self):
+		self.vs.stop()
 		cv2.destroyAllWindows()
 
 	def get_frame(self):
@@ -101,6 +103,6 @@ class FaceDetect(object):
 
 		# update the FPS counter
 		self.fps.update()
+		print("[INFO] fps : {}".format(self.fps._numFrames))
 		ret, jpeg = cv2.imencode('.jpg', frame)
-		return jpeg.tobytes()
- # name, proba, preds
+		return jpeg, name
